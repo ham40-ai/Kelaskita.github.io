@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelas IX.4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+/* ===== FONT OFFLINE ===== */
+@font-face {
+  font-family: 'Poppins';
+  src: url('font/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ===== RESET ===== */
+
+  *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arvo', serif;
+}
+
+body {
+  background: #f2f4ff;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #6c63ff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+}
+
+.header p {
+  font-family: 'roboto', serif;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===== MENU ===== */
+.menu {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.menu button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #dcdcff;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.menu button.active {
+  background: #6c63ff;
+  color: white;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  display: none;
+  padding: 20px;
+}
+
+.content.active {
+  display: block;
+}
+
+/* ===== JUDUL SECTION ===== */
+.title {
+  margin: 20px 0 10px;
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+}
+
+/* ===== INFO BOX ===== */
+.info {
+  display: flex;
+  gap: 15px;
+}
+
+.box {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.box span {
+  font-size: 19px;
+}
+
+/* ===== GRID & CARD ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  color: #6c63ff;
+}
+
+.card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* ===== WALI KELAS ===== */
+.wali {
+  grid-template-columns: 1fr;
+}
+
+.wali-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.wali-card img {
+  width: 100%;
+  max-width: 300px;
+  height: 160px;
+  object-fit: cover;
+  object-position: 20% 10%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+/* ===== LIST ===== */
+.list {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.list li {
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== SISWA ===== */
+.siswa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* ===== SISWA ANIMASI FADE-IN STAGGERED ===== */
+.siswa-card {
+  background: rgba(0, 255, 0, 0.2); /* Warna hijau transparan */
+  border: 2px solid #00FF00;        /* Border hijau */
+  border-radius: 12px;
+  padding: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.siswa-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover tetap aktif */
+.siswa-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+
+.siswa-card:hover {
+  transform: translateY(-3px);
+
+}
+
+/* ===== JADWAL ===== */
+.jadwal-card {
+  background: white;
+  padding: 16px;
+  border-radius: 15px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jadwal-card p {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 4px solid #6c63ff;
+}
+
+.foto-kelas img {
+  transition: transform 0.3s;
+}
+
+.foto-kelas img:hover {
+  transform: scale(1.03);
+}
+
+/* ===== JADWAL PIKET ===== */
+.piket-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.piket-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .08);
+}
+
+.piket-card h4 {
+  margin-bottom: 29px;
+  color: #6c63ff;
+}
+
+/* Jumat full ke samping */
+.piket-card.full {
+  grid-column: 1 / -1;
+}
+
+/* ===== SHORT GALLERY ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== STAGGER ANIMATION ===== */
+.stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerFade 0.6s ease forwards;
+}
+
+@keyframes staggerFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== SLIDE FROM LEFT ===== */
+.slide {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideIn 0.6s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== FLOAT ANIMATION ===== */
+.float {
+  animation: floatUp 3.5s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,.12);
+  }
+  50% {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 30px rgba(0,0,0,.18);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,.12);
+  }
+}
+
+/* ===== ANIME GLOW & PARTICLE BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, #ff9d9d55, transparent 50%),
+              radial-gradient(circle at 80% 70%, #6c63ff55, transparent 50%);
+  z-index: -1;
+  animation: glowAnim 6s ease-in-out infinite alternate;
+}
+
+@keyframes glowAnim {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Particle dots */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: particleAnim 6s linear infinite;
+}
+
+@keyframes particleAnim {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(-800px) translateX(100px) rotate(360deg); opacity:0; }
+}
+
+/* ===== OPENING SAMBUTAN ===== */
+.opening {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #6c63ff, #8f88ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 1s ease forwards;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: zoomIn 1s ease;
+}
+
+.opening-box h1 {
+  font-size: 36px;
+  font-family: 'Arvo', serif;
+  margin-bottom: 10px;
+}
+
+.opening-box p {
+  font-family: 'Roboto', sans-serif;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.opening-box button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #6c63ff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.opening-box button:hover {
+  transform: scale(1.1);
+}
+
+/* ANIMASI */
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.8);}
+  to { opacity: 1; transform: scale(1);}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.content {
+  opacity: 1; /* default tampil */
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.jadwal-card p {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 4px solid #6c63ff;
+  transition: all 0.3s ease;
+}
+
+.jadwal-card p.today {
+  border-left: 4px solid transparent;
+  background: linear-gradient(90deg, #6c63ff, #ff63a5);
+  color: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px #6c63ff; }
+  100% { box-shadow: 0 0 20px #ff63a5; }
+}
+
+.jadwal-card p:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+.jadwal-card {
+  background: linear-gradient(135deg, #00F72F, #8f88ff);
+  color: white;
+  padding: 16px;
+  border-radius: 15px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.jadwal-card p {
+  padding-left: 10px;
+  border-left: 4px solid rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+
+.piket-card {
+  background: linear-gradient(135deg, #ffffff, #f0f0ff);
+  padding: 14px;
+  border-radius: 14px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.piket-card:nth-child(1) { background: linear-gradient(135deg, #FF5900, #5A5A5A); color: white; }
+.piket-card:nth-child(2) { background: linear-gradient(135deg, #ff63a5, #ffb563); color: white; }
+.piket-card:nth-child(3) { background: linear-gradient(135deg, #63ffda, #63b8ff); color: white; }
+.piket-card:nth-child(4) { background: linear-gradient(135deg, #ffea63, #ffb563); color: white; }
+.piket-card.full { background: linear-gradient(135deg, #6cff63, #63ffb8); color: white; }
+
+.card {
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #7ec8ff; /* border biru muda */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* ===== STRUCTURE KELAS ===== */
+.structure-card {
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #7ec8ff; /* biru muda */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.structure-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.structure-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  display: none;
+}
+
+.content.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+  </style>
+</head>
+<body>
+
+  <!-- OPENING -->
+  <div class="opening" id="opening">
+    <div class="glass opening-box">
+      <h1 id="opening-title">SELAMAT DATANG DI KELAS IX.4</h1>
+      <p>SMPN 1 ATAP TAMBUN UTARA</p>
+      <p>Tahun Ajaran 2024/2025</p>
+      <button onclick="enterClass()">Masuk Kelas</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Kelas IX.4</h1>
+    <p>SMPN 1 ATAP TAMBUN UTARA</p>
+    <p>Tahun Ajaran 2024/2025</p>
+  </header>
+
+  <!-- MENU -->
+  <nav class="menu">
+    <button class="active" onclick="showSection('ringkasan', this)">Ringkasan</button>
+    <button onclick="showSection('siswa', this)">Siswa/i</button>
+    <button onclick="showSection('jadwal', this)">Jadwal</button>
+    <button onclick="showSection('gallery', this)">Gallery</button>
+  </nav>
+
+  <!-- RINGKASAN -->
+  <section id="ringkasan" class="content active">
+    <div class="info">
+      <div class="box"><span id="totalSiswa">35</span><br><span>Total Siswa</span></div>
+      <div class="box"><span id="totalMapel">12</span><br><span>Mata Pelajaran</span></div>
+    </div>
+
+    <h2 class="title">Struktur Kelas</h2>
+
+    <div class="grid wali">
+      <div class="card wali-card">
+        <img src="wali.jpg">
+        <h3>Wali Kelas</h3>
+        <p>Tedi Friyanto s.pd</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><img src="ketua.jpg"><h3>Ketua Kelas</h3><p>M.Riski</p></div>
+      <div class="card"><img src="wakil.jpg"><h3>Wakil Ketua</h3><p>Aqila Humaira</p></p></div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><img src="sekre1.jpg"><h3>Sekretaris 1</h3><p>Manda Auliana.Z</p></div>
+      <div class="card"><img src="sekre2.jpg"><h3>Sekretaris 2</h3><p>Riska All Fanum</p></div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><img src="benda1.jpg"><h3>Bendahara 1</h3><p>Angelina Khoirunnisa</p></p></div>
+      <div class="card"><img src="benda2.jpg"><h3>Bendahara 2</h3><p>Rahma Nur.A</p></div>
+    </div>
+  </section>
+
+  <!-- SISWA -->
+  <section id="siswa" class="content">
+    <h2 class="title">Daftar Siswa/i</h2>
+    <div class="siswa-grid">
+      <div class="siswa-card">1. Abdillah Bakri</div>
+      <div class="siswa-card">2. Aggil Dwan.D</div>
+      <div class="siswa-card">3. Aghnia Ilmi</div>
+      <div class="siswa-card">4. Ainun Nur.A</div>
+      <div class="siswa-card">5. Andika Desma.A</div>
+      <div class="siswa-card">6. Angelina Khoirunnisa</div>
+      <div class="siswa-card">7. Annisa Aprilia.P</div>
+      <div class="siswa-card">8. Aqila Humaira</div>
+      <div class="siswa-card">9. Arifin Ilham</div>
+      <div class="siswa-card">10. Bayu Saputra</div>
+      <div class="siswa-card">11. Charissa.M.A</div>
+      <div class="siswa-card">12. Ella Nur Cahyani</div>
+      <div class="siswa-card">13. Erika</div>
+      <div class="siswa-card">14. Irwan</div>
+      <div class="siswa-card">15. Karna Wijaya</div>
+      <div class="siswa-card">16. Kirana Aditya.P</div>
+      <div class="siswa-card">17. Manda Auliana.Z</div>
+      <div class="siswa-card">18. M.Fahri</div>
+      <div class="siswa-card">19. M.Hildan.A</div>
+      <div class="siswa-card">20. M.Syamsidin</div>
+      <div class="siswa-card">21. M.Riski</div>
+      <div class="siswa-card">22. Nabila</div>
+      <div class="siswa-card">23. NurSaid</div>
+      <div class="siswa-card">24. Nurhayati</div>
+      <div class="siswa-card">25. Rahma Nur.A</div>
+      <div class="siswa-card">26. Rahil Adi.M</div>
+      <div class="siswa-card">27. Ravi Nur.P</div>
+      <div class="siswa-card">28. Reyhan Saputra</div>
+      <div class="siswa-card">29. Riska All Fanum</div>
+      <div class="siswa-card">30. Setiawan</div>
+      <div class="siswa-card">31. Sugi Aji</div>
+      <div class="siswa-card">32. Syaqila Indrawan</div>
+      <div class="siswa-card">33. Tata Wijaya</div>
+      <div class="siswa-card">34. Tahiratul Husna</div>
+      <div class="siswa-card">35. Vika Rahayu</div>
+    </div>
+  </section>
+
+  <!-- JADWAL -->
+  <section id="jadwal" class="content">
+    <h2 class="title">Jadwal Pelajaran</h2>
+    <div class="jadwal-card">
+ <p><strong>Senin</strong> : <ul>    
+      <li><p>Seni budaya</p>    
+      <p>Matematika</p>    
+      <p>IPS</p></li>    
+    </ul></p>    
+    <p><strong>Selasa</strong> : <ul>    
+      <li><p>Matematika</p>    
+      <p>Informatika</p>    
+      <p>Bahasa Indonesia</p></li>    
+    </ul></p>    
+    <p><strong>Rabu</strong> : <ul>    
+      <li><p>Bahasa Inggris</p>    
+      <p>B.sunda</p>    
+      <p>BTQ</p>    
+      <p>PPKN</p>
+      <p>IPS</p>
+      <p>IPA</p></li>    
+    </ul></p>    
+    <p><strong>Kamis</strong> :  <li><p>PAI</p>    
+      <p>PJOK</p>    
+      <p>IPA</p>    
+    </li></p>    
+    <p><strong>Jumat</strong> :  <li><p>Bahasa Indonesia</p>    
+      <p>Bahasa Inggris</p></li></p>    
+  </div>   
+    <h2 class="title">Jadwal Piket</h2>
+    <div class="piket-grid">
+      <div class="piket-card"><h4>Senin</h4><ul><li>Hildan</li><li>Abdillah</li><li>Ainun</li><li>Ilmi</li><li>Vika</li><li>Rayhan</li><li>Karna</li></ul></div>
+      <div class="piket-card"><h4>Selasa</h4><ul><li>Said</li><li>Annisa</li><li>Manda</li><li>Syaqila</li><li>Agil</li><li>Ravi</li><li>Kirana</li></ul></div>
+      <div class="piket-card"><h4>Rabu</h4><ul><li>Nurhayati</li><li>Ella</li><li>Aini</li><li>Setiawan</li><li>Fahri</li><li>Erika</li><li>Nabila</li></ul></div>
+      <div class="piket-card"><h4>Kamis</h4><ul><li>Angel</li><li>Riski</li><li>Sam</li><li>Husna</li><li>Bayu</li><li>Andika</li><li>Rahil</li></ul></div>
+      <div class="piket-card full"><h4>Jumat</h4><ul><li>Irwan</li><li>Charrisa</li><li>Sugi</li><li>Ilham</li><li>Riska</li><li>Qila</li><li>Tata</li></ul></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="content">
+    <h2 class="title">Short Gallery Kelas</h2>
+    <div class="gallery">
+  <img src="ha.jpg">
+  <img src="ha2.jpg">
+  <img src="ha3.jpg">
+  <img src="ha4.jpg">
+  <img src="ha5.jpg">
+  <img src="bersama.jpg">
+</div>
+
+
+  </section>
+
+  <script>
+    function enterClass(){
+      document.getElementById('opening').style.display='none';
+    }
+
+    function showSection(sectionId, btn){
+      const contents=document.querySelectorAll('.content');
+      const buttons=document.querySelectorAll('.menu button');
+      contents.forEach(c=>c.classList.remove('active'));
+      buttons.forEach(b=>b.classList.remove('active'));
+      const section=document.getElementById(sectionId);
+      setTimeout(()=>{section.classList.add('active');},50);
+      btn.classList.add('active');
+
+      if(sectionId==='siswa'){
+        const siswaCards=section.querySelectorAll('.siswa-card');
+        siswaCards.forEach((card,index)=>{
+          card.classList.remove('show');
+          setTimeout(()=>{card.classList.add('show');},index*100);
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
